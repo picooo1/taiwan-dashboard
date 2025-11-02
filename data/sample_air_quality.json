@@ -1,0 +1,20 @@
+[
+  {"station":"Taipei - Zhongzheng","lat":25.032969,"lon":121.565418,"timestamp":"2025-10-30T08:00:00Z","aqi":72,"pm1_0":10,"pm2_5":18,"pm10":28,"no2":21,"o3":30,"wind_speed":2.1,"wind_direction":45,"temp":24.3,"humidity":68},
+  {"station":"Kaohsiung - Zuoying","lat":22.669327,"lon":120.487026,"timestamp":"2025-10-30T08:00:00Z","aqi":85,"pm1_0":14,"pm2_5":26,"pm10":40,"no2":19,"o3":33,"wind_speed":3.2,"wind_direction":180,"temp":27.1,"humidity":72},
+  {"station":"Taichung - West","lat":24.147736,"lon":120.673648,"timestamp":"2025-10-30T08:00:00Z","aqi":78,"pm1_0":12,"pm2_5":22,"pm10":35,"no2":23,"o3":28,"wind_speed":1.8,"wind_direction":90,"temp":25.4,"humidity":65},
+  {"station":"Hualien - Jian","lat":23.976,"lon":121.607,"timestamp":"2025-10-30T08:00:00Z","aqi":66,"pm1_0":9,"pm2_5":16,"pm10":24,"no2":12,"o3":40,"wind_speed":2.5,"wind_direction":270,"temp":23.8,"humidity":70},
+  {"station":"Pingtung - City","lat":22.551,"lon":120.487,"timestamp":"2025-10-30T08:00:00Z","aqi":83,"pm1_0":13,"pm2_5":24,"pm10":38,"no2":18,"o3":35,"wind_speed":2.8,"wind_direction":160,"temp":28.2,"humidity":75},
+
+  {"station":"Taipei - Zhongzheng","lat":25.032969,"lon":121.565418,"timestamp":"2025-10-30T14:00:00Z","aqi":80,"pm1_0":11,"pm2_5":20,"pm10":30,"no2":24,"o3":35,"wind_speed":2.0,"wind_direction":60,"temp":26.1,"humidity":60},
+  {"station":"Kaohsiung - Zuoying","lat":22.669327,"lon":120.487026,"timestamp":"2025-10-30T14:00:00Z","aqi":92,"pm1_0":16,"pm2_5":29,"pm10":45,"no2":21,"o3":38,"wind_speed":3.8,"wind_direction":200,"temp":29.0,"humidity":68},
+  {"station":"Taichung - West","lat":24.147736,"lon":120.673648,"timestamp":"2025-10-30T14:00:00Z","aqi":88,"pm1_0":13,"pm2_5":25,"pm10":38,"no2":26,"o3":31,"wind_speed":2.3,"wind_direction":110,"temp":27.0,"humidity":62},
+  {"station":"Hualien - Jian","lat":23.976,"lon":121.607,"timestamp":"2025-10-30T14:00:00Z","aqi":70,"pm1_0":10,"pm2_5":18,"pm10":27,"no2":14,"o3":44,"wind_speed":2.9,"wind_direction":300,"temp":24.5,"humidity":66},
+  {"station":"Pingtung - City","lat":22.551,"lon":120.487,"timestamp":"2025-10-30T14:00:00Z","aqi":89,"pm1_0":15,"pm2_5":27,"pm10":42,"no2":20,"o3":37,"wind_speed":3.0,"wind_direction":180,"temp":30.1,"humidity":70},
+
+  {"station":"Taipei - Zhongzheng","lat":25.032969,"lon":121.565418,"timestamp":"2025-10-31T08:00:00Z","aqi":68,"pm1_0":9,"pm2_5":17,"pm10":25,"no2":20,"o3":29,"wind_speed":1.6,"wind_direction":30,"temp":23.9,"humidity":69},
+  {"station":"Kaohsiung - Zuoying","lat":22.669327,"lon":120.487026,"timestamp":"2025-10-31T08:00:00Z","aqi":81,"pm1_0":13,"pm2_5":24,"pm10":37,"no2":18,"o3":34,"wind_speed":3.1,"wind_direction":170,"temp":26.4,"humidity":71},
+  {"station":"Taichung - West","lat":24.147736,"lon":120.673648,"timestamp":"2025-10-31T08:00:00Z","aqi":73,"pm1_0":11,"pm2_5":19,"pm10":33,"no2":22,"o3":27,"wind_speed":1.9,"wind_direction":100,"temp":24.8,"humidity":64},
+  {"station":"Hualien - Jian","lat":23.976,"lon":121.607,"timestamp":"2025-10-31T08:00:00Z","aqi":64,"pm1_0":8,"pm2_5":15,"pm10":22,"no2":11,"o3":38,"wind_speed":2.2,"wind_direction":250,"temp":23.2,"humidity":68},
+  {"station":"Pingtung - City","lat":22.551,"lon":120.487,"timestamp":"2025-10-31T08:00:00Z","aqi":79,"pm1_0":12,"pm2_5":23,"pm10":36,"no2":17,"o3":33,"wind_speed":2.5,"wind_direction":150,"temp":27.8,"humidity":73}
+]
+

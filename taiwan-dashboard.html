@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Air Quality Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome from CDN (local vendor not present) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/taiwan-dashboard.css" rel="stylesheet">
+    <!-- Mapbox GL JS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <!-- Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div id="map"></div>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-title">
+                <h1>Taiwan Air Quality Dashboard</h1>
+                <div class="subtitle">Real-time Environmental Monitoring</div>
+            </div>
+            <!-- header-stats removed: temp/humidity/wind are shown in left panel now -->
+            <div class="last-update">Last updated: <span id="currentTime"></span></div>
+        </header>
+
+        <main class="dashboard-layout">
+            <!-- Left Panel - Environmental Conditions -->
+            <section class="left-panel glass-card">
+                <!-- Weather Stats -->
+                <div class="weather-stats-grid-vertical">
+                    <div class="square-weather-box" id="boxTemp">
+                        <div class="weather-sticker"><i class="fas fa-sun"></i></div>
+                        <div class="weather-value" id="leftTemp">26°C</div>
+                        <div class="weather-label">Temperature</div>
+                    </div>
+                    <div class="square-weather-box" id="boxHumidity">
+                        <div class="weather-sticker"><i class="fas fa-cloud-showers-heavy"></i></div>
+                        <div class="weather-value" id="leftHumidity">65%</div>
+                        <div class="weather-label">Humidity</div>
+                    </div>
+                </div>
+
+                <!-- Weekly Temp & Humidity for selected city -->
+                <div class="metric-card">
+                    <h3><i class="fas fa-calendar-week"></i> Last 7 days — Temp & Humidity</h3>
+                    <div class="chart-container" style="height: 220px;">
+                        <canvas id="tempWeekChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- City Temperature Comparison -->
+                <div class="metric-card">
+                    <h3><i class="fas fa-temperature-high"></i> Temperature Comparison</h3>
+                    <div class="chart-container" style="height: 200px;">
+                        <canvas id="tempCompareChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Wind: simple city wind speeds -->
+                <div class="metric-card">
+                    <h3><i class="fas fa-wind"></i> Wind — city speeds</h3>
+                    <div class="chart-container" style="height: 160px; display:flex; align-items:center; justify-content:center;">
+                        <table id="windTable" class="wind-table">
+                            <thead>
+                                <tr><th>City</th><th>Wind (m/s)</th></tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Map Overlay (map is full-screen background) -->
+          
+
+            <!-- Right Panel -->
+            <section class="right-panel glass-card">
+                <div class="metric-card aqi-summary">
+                    <h3>Air Quality Index</h3>
+                    <div class="aqi-display">
+                        <div class="aqi-number" id="currentAQI">45</div>
+                        <div class="aqi-status" id="aqiStatus">Good Air Quality</div>
+                    </div>
+                    <div class="aqi-levels">
+                        <div class="aqi-level">
+                            <span class="dot good"></span>
+                            <span>Good (0-50)</span>
+                        </div>
+                        <div class="aqi-level">
+                            <span class="dot moderate"></span>
+                            <span>Moderate (51-100)</span>
+                        </div>
+                        <div class="aqi-level">
+                            <span class="dot unhealthy"></span>
+                            <span>Unhealthy (101+)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card pollutants">
+                    <h3>Pollutant Values</h3>
+                    <div class="pollutant-grid">
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <i class="fas fa-smog pollutant-icon"></i>
+                                <span class="pollutant-name">PM2.5</span>
+                            </div>
+                            <div class="pollutant-value">15
+                                <span class="pollutant-unit">µg/m³</span>
+                            </div>
+                            <div class="pollutant-trend trend-down">
+                                <i class="fas fa-arrow-down trend-icon"></i>
+                                -12% from yesterday
+                            </div>
+                        </div>
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <i class="fas fa-wind pollutant-icon"></i>
+                                <span class="pollutant-name">PM10</span>
+                            </div>
+                            <div class="pollutant-value">38
+                                <span class="pollutant-unit">µg/m³</span>
+                            </div>
+                            <div class="pollutant-trend trend-stable">
+                                <i class="fas fa-equals trend-icon"></i>
+                                No significant change
+                            </div>
+                        </div>
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <i class="fas fa-cloud pollutant-icon"></i>
+                                <span class="pollutant-name">O₃</span>
+                            </div>
+                            <div class="pollutant-value">52
+                                <span class="pollutant-unit">ppb</span>
+                            </div>
+                            <div class="pollutant-trend trend-up">
+                                <i class="fas fa-arrow-up trend-icon"></i>
+                                +8% from yesterday
+                            </div>
+                        </div>
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <i class="fas fa-industry pollutant-icon"></i>
+                                <span class="pollutant-name">NO₂</span>
+                            </div>
+                            <div class="pollutant-value">15
+                                <span class="pollutant-unit">ppb</span>
+                            </div>
+                            <div class="pollutant-trend trend-down">
+                                <i class="fas fa-arrow-down trend-icon"></i>
+                                -5% from yesterday
+                            </div>
+                        </div>
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <i class="fas fa-industry pollutant-icon"></i>
+                                <span class="pollutant-name">SO₂</span>
+                            </div>
+                            <div class="pollutant-value">3
+                                <span class="pollutant-unit">ppb</span>
+                            </div>
+                            <div class="pollutant-trend trend-stable">
+                                <i class="fas fa-equals trend-icon"></i>
+                                No significant change
+                            </div>
+                        </div>
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <i class="fas fa-car pollutant-icon"></i>
+                                <span class="pollutant-name">CO</span>
+                            </div>
+                            <div class="pollutant-value">0.5
+                                <span class="pollutant-unit">ppm</span>
+                            </div>
+                            <div class="pollutant-trend trend-down">
+                                <i class="fas fa-arrow-down trend-icon"></i>
+                                -15% from yesterday
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <h3>Pollutant Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="pollutantPieChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- 24h AQI Trend removed; using pollutant pie chart only -->
+            </section>
+        </main>
+    </div>
+
+    <script src="js/taiwan-dashboard.js"></script>
+</body>
+</html>

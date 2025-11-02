@@ -1,0 +1,19 @@
+# Node
+node_modules/
+npm-debug.log
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
